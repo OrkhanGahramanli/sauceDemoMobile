@@ -21,11 +21,6 @@ public class LoginSteps extends BaseMethods {
         Assert.assertTrue(findElementByText("Products").isDisplayed());
     }
 
-    @Then("User should get {string} message")
-    public void userShouldGetMessage(String message) {
-        Assert.assertTrue(findElementByText(message).isDisplayed());
-    }
-
     @And("User clicks {string} button on pop-up window")
     public void userClicksButtonOnPopUpWindow(String element) {
         driver.findElement(elementsMap.get(element)).click();

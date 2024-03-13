@@ -11,8 +11,7 @@ import java.util.List;
 
 @CucumberOptions(
         features = {"classpath:features"},
-        plugin = {"pretty", "json:target/cucumber.json"},
-        tags = "@AddToBasket"
+        plugin = {"pretty", "json:target/cucumber.json"}
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests {
