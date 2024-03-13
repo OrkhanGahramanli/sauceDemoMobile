@@ -12,8 +12,8 @@ public class BaseSteps extends BaseMethods {
 
     GeneralPom generalPom = GeneralPom.getInstance();
 
-    @Given("User is in app")
-    public void userIsInApp(){
+    @Given("User is in {string}")
+    public void userIsInPage(String text){
 
     }
 
