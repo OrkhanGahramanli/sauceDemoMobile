@@ -11,7 +11,8 @@ import java.util.List;
 
 @CucumberOptions(
         features = {"classpath:features"},
-        plugin = {"pretty", "json:target/cucumber.json"}
+        plugin = {"pretty", "json:target/cucumber.json"},
+        tags = "@SortProducts"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests {

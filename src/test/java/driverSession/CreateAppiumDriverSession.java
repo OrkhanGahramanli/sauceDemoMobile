@@ -15,6 +15,6 @@ public class CreateAppiumDriverSession {
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("automationName", "UiAutomator2");
         capabilities.setCapability("app",System.getProperty("user.dir") + "/app/sauceDemo.apk" );
-        return new AppiumDriver(url, capabilities);
+        return new AndroidDriver(url,capabilities);
     }
 }

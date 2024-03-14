@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import com.google.common.collect.ImmutableMap;
 import hooks.CucumberHook;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
@@ -54,5 +55,19 @@ public class BaseMethods {
     protected void moveToElement(WebElement element){
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
+    }
+
+    protected List<WebElement> scrollAndAddToList(List<WebElement> list){
+        boolean canScrollMore;
+        List<WebElement> elements;
+        do {
+            elements = list;
+            canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                    "left", 100, "top", 100, "width", 200, "height", 200,
+                    "direction", "down",
+                    "percent", 3.0
+            ));
+        }while (canScrollMore);
+        return elements;
     }
 }

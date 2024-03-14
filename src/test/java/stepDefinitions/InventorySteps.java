@@ -1,5 +1,8 @@
 package stepDefinitions;
 
+import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -59,11 +62,54 @@ public class InventorySteps extends BaseMethods{
 
     @Then("Products order should by {string}")
     public void productsOrderShouldBy(String sortType) {
-        List<WebElement> productNames = new ArrayList<>();
-        while (!driver.findElement(inventoryPom.getInventoryPageFooter()).isDisplayed()){
-            moveToElement(driver.findElement(inventoryPom.getInventoryPageFooter()));
-            productNames.add(driver.findElement(inventoryPom.getProducts()));
+
+        switch (sortType){
+            case "Name - Ascending":
+            scrollAndAddToList(driver.findElements(inventoryPom.getProducts()));
+            for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size(); i++){
+
+                if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size()) break;
+
+                Assert.assertTrue(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i+1).getText().
+                        compareTo(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i).getText()) >= 0);
+            }
+            break;
+
+            case "Name - Descending":
+                scrollAndAddToList(driver.findElements(inventoryPom.getProducts()));
+                for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size(); i++){
+
+                    if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size()) break;
+
+                    Assert.assertTrue(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i+1).getText().
+                            compareTo(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i).getText()) <= 0);
+                }
+            break;
+
+            case "Price - Ascending":
+                scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices()));
+                for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size(); i++){
+                    if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size()) break;
+
+                    Assert.assertTrue(Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i+1).getText().
+                            replace("$", ""))
+                            >= Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i).getText().
+                            replace("$", "")));
+                }
+            break;
+
+            case "Price - Descending":
+                scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices()));
+                for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size(); i++){
+
+                    if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size()) break;
+
+                    Assert.assertTrue(Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i+1).getText().
+                            replace("$", ""))
+                            <= Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i).getText().
+                            replace("$", "")));
+                }
+                break;
         }
-        System.out.println(productNames);
     }
 }

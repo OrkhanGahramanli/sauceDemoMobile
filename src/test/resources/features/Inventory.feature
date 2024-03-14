@@ -55,18 +55,18 @@ Feature: Inventory
       And User clicks "placeOrderBtn" button
       Then User should get "Checkout Complete" message
 
-#      @SortProducts
-#        Scenario Outline: Sort products by "<sortType>"
-#        Given User is in "inventoryPage"
-#        When User clicks "sortProductBtn" button
-#        And User selects "<sortType>" by text
-#        Then Products order should by "<sortType>"
-#
-#        Examples:
-#          | sortType           |
-#          | Name - Ascending   |
-#          | Name - Descending  |
-#          | Price - Ascending  |
-#          | Price - Descending |
+      @SortProducts
+        Scenario Outline: Sort products by "<sortType>"
+        Given User is in "inventoryPage"
+        When User clicks "sortProductBtn" button
+        And User selects "<sortType>" by text
+        Then Products order should by "<sortType>"
+
+        Examples:
+          | sortType           |
+          | Name - Ascending   |
+          | Name - Descending  |
+          | Price - Ascending  |
+          | Price - Descending |
 
         
