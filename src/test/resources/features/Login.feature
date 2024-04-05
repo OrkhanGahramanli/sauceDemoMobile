@@ -2,7 +2,7 @@ Feature: Login
 
   @Login
   Scenario: Successful login
-    Given User is in app
+    Given User is in "app"
     When User clicks "burgerMenu" button
     And User clicks "Log In" button from dropdown
     And User fills "bob@example.com" in "username" input field
@@ -12,7 +12,7 @@ Feature: Login
 
     @UnSuccessLogin
     Scenario Outline: Unsuccessful login with invalid credentials/ Scenario name: "<CaseName>"
-      Given User is in app
+      Given User is in "app"
       When User clicks "burgerMenu" button
       And User clicks "Log In" button from dropdown
       And User fills "<userName>" in "username" input field

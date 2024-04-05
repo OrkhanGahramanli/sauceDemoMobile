@@ -2,11 +2,13 @@ package stepDefinitions;
 
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en_old.Ac;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -14,8 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import pom.InventoryPom;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static pom.ElementsMap.elementsMap;
 
@@ -62,52 +63,88 @@ public class InventorySteps extends BaseMethods{
 
     @Then("Products order should by {string}")
     public void productsOrderShouldBy(String sortType) {
-
+        boolean canScrollMore;
+        List<WebElement> list;
+        Set<String> products = new LinkedHashSet<>();
+        List<String> productsList;
         switch (sortType){
             case "Name - Ascending":
-            scrollAndAddToList(driver.findElements(inventoryPom.getProducts()));
-            for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size(); i++){
+                do {
+                    list = driver.findElements(inventoryPom.getProducts());
+                    for (WebElement element : list){
+                        products.add(element.getText());
+                    }
+                    canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                            "left", 100, "top", 100, "width", 200, "height", 200,
+                            "direction", "down",
+                            "percent", 3.0
+                    ));
+                }while (canScrollMore);
+                productsList = new ArrayList<>(products);
 
-                if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size()) break;
-
-                Assert.assertTrue(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i+1).getText().
-                        compareTo(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i).getText()) >= 0);
-            }
-            break;
+                for (int i = 1; i < productsList.size(); i++){
+                    Assert.assertTrue(productsList.get(i-1).
+                        compareTo(productsList.get(i)) <= 0);
+                }
+                break;
 
             case "Name - Descending":
-                scrollAndAddToList(driver.findElements(inventoryPom.getProducts()));
-                for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size(); i++){
+                do {
+                    list = driver.findElements(inventoryPom.getProducts());
+                    for (WebElement element : list){
+                        products.add(element.getText());
+                    }
+                    canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                            "left", 100, "top", 100, "width", 200, "height", 200,
+                            "direction", "down",
+                            "percent", 3.0
+                    ));
+                }while (canScrollMore);
+                productsList = new ArrayList<>(products);
 
-                    if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).size()) break;
-
-                    Assert.assertTrue(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i+1).getText().
-                            compareTo(scrollAndAddToList(driver.findElements(inventoryPom.getProducts())).get(i).getText()) <= 0);
+                for (int i = 1; i < productsList.size(); i++){
+                    Assert.assertTrue(productsList.get(i-1).
+                        compareTo(productsList.get(i)) >= 0);
                 }
             break;
 
             case "Price - Ascending":
-                scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices()));
-                for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size(); i++){
-                    if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size()) break;
+                do {
+                    list = driver.findElements(inventoryPom.getProductPrices());
+                    for (WebElement element : list){
+                        products.add(element.getText());
+                    }
+                    canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                            "left", 100, "top", 100, "width", 200, "height", 200,
+                            "direction", "down",
+                            "percent", 3.0
+                    ));
+                }while (canScrollMore);
+                productsList = new ArrayList<>(products);
 
-                    Assert.assertTrue(Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i+1).getText().
-                            replace("$", ""))
-                            >= Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i).getText().
-                            replace("$", "")));
+                for (int i = 1; i < productsList.size(); i++){
+                    Assert.assertTrue(Double.parseDouble(productsList.get(i-1).replace("$", "")) <=
+                            (Double.parseDouble(productsList.get(i).replace("$", ""))));
                 }
             break;
 
             case "Price - Descending":
-                scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices()));
-                for (int i=0; i< scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size(); i++){
+                do {
+                    list = driver.findElements(inventoryPom.getProductPrices());
+                    for (WebElement element : list){
+                        products.add(element.getText());
+                    }
+                    canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+                            "left", 100, "top", 100, "width", 200, "height", 200,
+                            "direction", "down",
+                            "percent", 3.0
+                    ));
+                }while (canScrollMore);
+                productsList = new ArrayList<>(products);
 
-                    if (i+1 == scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).size()) break;
-
-                    Assert.assertTrue(Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i+1).getText().
-                            replace("$", ""))
-                            <= Double.parseDouble(scrollAndAddToList(driver.findElements(inventoryPom.getProductPrices())).get(i).getText().
-                            replace("$", "")));
+                for (int i = 1; i < productsList.size(); i++){
+                    Assert.assertTrue(Double.parseDouble(productsList.get(i-1).replace("$", "")) >=
+                            (Double.parseDouble(productsList.get(i).replace("$", ""))));
                 }
                 break;
         }

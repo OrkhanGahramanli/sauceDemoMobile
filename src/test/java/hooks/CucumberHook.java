@@ -11,6 +11,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.time.Duration;
 
 public class CucumberHook {

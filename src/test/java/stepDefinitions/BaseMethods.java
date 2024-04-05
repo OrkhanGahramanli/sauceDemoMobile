@@ -13,7 +13,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BaseMethods {
 
@@ -57,17 +59,21 @@ public class BaseMethods {
         actions.moveToElement(element).perform();
     }
 
-    protected List<WebElement> scrollAndAddToList(List<WebElement> list){
-        boolean canScrollMore;
-        List<WebElement> elements;
-        do {
-            elements = list;
-            canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
-                    "left", 100, "top", 100, "width", 200, "height", 200,
-                    "direction", "down",
-                    "percent", 3.0
-            ));
-        }while (canScrollMore);
-        return elements;
-    }
+//    protected Set<String> scrollAndAddToList(List<WebElement> list){
+//        boolean canScrollMore;
+//        List<WebElement> elements;
+//        Set<String> elementsText = new HashSet<>();
+//        do {
+//            elements = list;
+//            for (WebElement element : elements){
+//                elementsText.add(element.getText());
+//            }
+//            canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
+//                    "left", 100, "top", 100, "width", 200, "height", 200,
+//                    "direction", "down",
+//                    "percent", 3.0
+//            ));
+//        }while (canScrollMore);
+//        return elementsText;
+//    }
 }

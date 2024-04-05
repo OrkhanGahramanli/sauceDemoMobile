@@ -1,10 +1,14 @@
 package driverSession;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileCommand;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class CreateAppiumDriverSession {
