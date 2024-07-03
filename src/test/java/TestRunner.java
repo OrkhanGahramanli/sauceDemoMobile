@@ -12,7 +12,7 @@ import java.util.List;
 @CucumberOptions(
         features = {"classpath:features"},
         plugin = {"pretty", "json:target/cucumber.json"},
-        tags = "@SortProducts"
+        tags = "@Logout"
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests {

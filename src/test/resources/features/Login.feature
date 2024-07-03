@@ -31,7 +31,7 @@ Feature: Login
 
   @Logout
   Scenario: Successful logout
-    Given User is in app
+    Given User is in "app"
     When User clicks "burgerMenu" button
     And User clicks "Log In" button from dropdown
     And User fills "bob@example.com" in "username" input field

@@ -57,6 +57,11 @@ public class BaseSteps extends BaseMethods {
         waitVisibilityElement(elementsMap.get(element), time);
     }
 
+    @And("Waiting {int} seconds for presence {string} element")
+    public void waitingSecondsForPresenceElement(int time, String element) {
+        waitPresenceElement(elementsMap.get(element), time);
+    }
+
     @And("User find {string} button by text and click")
     public void userFindButtonByTextAndClick(String text) {
         findElementByText(text).click();

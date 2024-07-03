@@ -46,7 +46,7 @@ Feature: Inventory
       And User fills "111" in "zipCode" input field
       And User fills "Azerbaijan" in "country" input field
       And User clicks "toPaymentBtn" button
-      And Waiting 5 seconds for visibility "fullName" element
+      And Waiting 5 seconds for presence "reviewOrderBtn" element
       And User fills "Orxan" in "fullName" input field
       And User fills "5258694535269854" in "cardNumber" input field
       And User fills "03/25" in "expirationDate" input field

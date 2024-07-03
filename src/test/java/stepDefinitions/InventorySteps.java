@@ -37,7 +37,7 @@ public class InventorySteps extends BaseMethods{
 
     @Then("Product name in details page should equal selected product name")
     public void productNameShouldEqualSelectedProduct() {
-        waitVisibilityElement(findElementByText(selectedProductName), 5);
+        waitPresenceElement(findByText(selectedProductName), 5);
         Assert.assertEquals(findElementByText(selectedProductName).getText(), selectedProductName);
     }
 

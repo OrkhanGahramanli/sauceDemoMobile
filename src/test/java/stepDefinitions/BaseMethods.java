@@ -25,6 +25,10 @@ public class BaseMethods {
         return driver.findElement(By.xpath("//*[@text='"+text+"']"));
     }
 
+    public By findByText(String text){
+        return By.xpath("//*[@text='"+text+"']");
+    }
+
     protected void waitVisibilityElement(By locator, int time){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -35,9 +39,14 @@ public class BaseMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    protected void waitVisibilityElement(List<WebElement> elements, int time){
+    protected void waitVisibilityElements(List<WebElement> elements, int time){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
+    protected void waitPresenceElement(By locator, int time){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     protected void selectVisibleText(WebElement element, String text){
